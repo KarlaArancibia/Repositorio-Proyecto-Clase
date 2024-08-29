@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #000000, #202020);
+        }
+        .container {
+            display: flex;
+            width: 90%;
+            max-width: 900px;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.079); 
+            
+            overflow: visible;
+        }
+        .left {
+            flex: 1.5;
+            background-color: #ff6e07;
+            color: #ffffff;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-image: url('img/REGISTRO.jpeg');
+            background-size: cover;
+            background-position: left; 
+            border-radius: 20px;            
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.236); 
+            text-align: left;
+        }
+        .left h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+        .left p {
+            margin: 0;
+            font-size: 1rem;
+        }
+        .left .footer {
+        margin-top: 20px;
+        font-size: 0.9rem;
+        text-align: center; 
+        }
+
+        .right {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+        .right h2 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        .right form .input-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .right form .input-group input {
+            padding: 10px 40px 10px 40px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .right form .input-group .icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+        }
+        .right form .input-group .eye-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        .right form button {
+            padding: 10px;
+            font-size: 1rem;
+            background-color: #000000;
+            border: none;
+            border-radius: 30px;
+            color: #ffffff;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        .right form button:hover {
+            background-color: #333333;
+        }
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+        .signup-link a {
+            color: #ff00ff;
+            text-decoration: none;
+        }
+        @media (max-width: 767px) {
+            .container {
+                flex-direction: column;
+            }
+            .left, .right {
+                border-radius: 20px;
+            }
+            .left {
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+            .right {
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+            }
+            .left {
+            border-radius: 20px; 
+            
+}
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <div>
+                <h1>Crear una nueva Cuenta</h1>
+                <p></p>
+            </div>
+            <p class="footer">Únete a nuestra comunidad</p>
+        </div>
+        <div class="right">
+            <h2>Registro</h2>
+            <form>
+                <div class="input-group">
+                    <span class="icon">👤</span>
+                    <input type="text" placeholder="Nombres" required>
+                </div>
+                <div class="input-group">
+                    <span class="icon">📧</span>
+                    <input type="email" placeholder="Correo Electronico" required>
+                </div>
+                <div class="input-group">
+                    <span class="icon">🔒</span>
+                    <input type="password" id="password" placeholder="Contraseña" required>
+                    <span class="eye-icon" onclick="togglePassword()">👁️</span>
+                </div>
+                <div class="input-group">
+                    <span class="icon">🔒</span>
+                    <input type="password" id="confirm-password" placeholder="Repite la Contraseña" required>
+                    <span class="eye-icon" onclick="togglePasswordConfirm()">👁️</span>
+                </div>
+                <div class="input-group">
+                    <span class="icon">📅</span>
+                    <input type="date" placeholder="Fecha de Nacimiento" required>
+                </div>
+                <button type="submit">GUARDAR DATOS</button>
+            </form>
+            <div class="signup-link">
+                ¿Ya tienes una cuenta? <a href="#">Login</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        function togglePassword() {
+            var passwordField = document.getElementById('password');
+            var eyeIcon = passwordField.nextElementSibling;
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                eyeIcon.textContent = '🙈';
+            } else {
+                passwordField.type = 'password';
+                eyeIcon.textContent = '👁️';
+            }
+        }
+        function togglePasswordConfirm() {
+            var passwordField = document.getElementById('confirm-password');
+            var eyeIcon = passwordField.nextElementSibling;
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                eyeIcon.textContent = '🙈';
+            } else {
+                passwordField.type = 'password';
+                eyeIcon.textContent = '👁️';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #313131, #000000);
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+            max-width: 900px;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.084);
+            overflow: visible;
+        }
+        .left, .right {
+            padding: 20px;
+        }
+        .left {
+            background-color: #4b006e;
+            color: #ffffff;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            text-align: left;
+            background-image: url('img/iniciosesion.jpeg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            min-height: 200px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.192); 
+            border-radius: 20px; 
+        }
+        .left h1 {
+            margin: 0;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        .left p {
+            margin: 0;
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            padding: 0 20px;
+            animation: blink 2s infinite;
+        }
+        
+        .right {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .right h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .right form {
+            display: flex;
+            flex-direction: column;
+        }
+        .right form .input-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .right form .input-group input {
+            padding: 10px 40px 10px 40px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .right form .input-group .icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .right form .input-group .eye-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+        .right form .forgot-password {
+            margin-bottom: 20px;
+            font-size: 14px;
+            text-align: right;
+        }
+        .right form button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #fcd535;
+            border: none;
+            border-radius: 50px;
+            color: #000000;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .right form button:hover {
+            background-color: #f7d457;
+        }
+        .google-button {
+            background:linear-gradient(to right, #00000075, #000000);
+            padding: 10px;
+            border: none;
+            border-radius: 50px;
+            color: rgb(255, 255, 255);
+            margin-bottom: 20px;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .google-button:hover {
+            background-color: #000000;
+        }
+        .right .signup-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        @media (min-width: 768px) {
+            .container {
+                flex-direction: row;
+            }
+            .left, .right {
+                padding: 40px;
+            }
+            .left {
+                flex: 2;
+            }
+            .right {
+                flex: 1.5;
+            }
+            .left p {
+                left: 50%;
+                transform: translateX(-50%);
+                text-align: center;
+            }
+        }
+        @media (max-width: 767px) {
+            .left p {
+                left: 50%;
+                transform: translateX(-50%);
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <h1>Login</h1>
+            <p>Inicia sesión para continuar</p>
+        </div>
+        <div class="right">
+            <h2>Iniciar Sesión</h2>
+            <button type="button" class="google-button">
+                Continuar con Google
+            </button>
+            <form>
+                <div class="input-group">
+                    <span class="icon">👤</span>
+                    <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
+                </div>
+                <div class="input-group">
+                    <span class="icon">🔒</span>
+                    <input type="password" id="password" name="password" placeholder="Contraseña" required>
+                    <span class="eye-icon" onclick="togglePassword()">👁️</span>
+                </div>
+                <a href="#" class="forgot-password">¿Olvidaste la contraseña?</a>
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+            <div class="signup-link">
+                ¿Aún no tienes una cuenta? <a href="#">Regístrate</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        function togglePassword() {
+            var passwordField = document.getElementById('password');
+            var eyeIcon = document.querySelector('.eye-icon');
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                eyeIcon.textContent = '🙈';
+            } else {
+                passwordField.type = 'password';
+                eyeIcon.textContent = '👁️';
+            }
+        }
+    </script>
+</body>
+</html>

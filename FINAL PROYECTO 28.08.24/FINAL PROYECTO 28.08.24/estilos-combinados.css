@@ -1,0 +1,116 @@
+:root {
+    --color-texto: #ffffff;
+    --color-resaltar: #f3ba2f;
+    --color-boton: #f3ba2f;
+    --color-boton-texto: #000000;
+    --color-fondo: #121212;
+    --color-fondo-barra: #1a1a1a;
+    --tamaño-boton: 1.2rem;
+    --tamaño-titulo: 3rem;
+    --tamaño-texto: 1rem;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+
+.botones-superiores {
+    display: flex;
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    z-index: 1000;
+}
+
+.botones-superiores button {
+    background-color: var(--color-boton);
+    color: var(--color-boton-texto);
+    border: none;
+    padding: 10px 20px;
+    font-size: var(--tamaño-boton);
+    margin-left: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.botones-superiores button:hover {
+    background-color: #e0a528;
+}
+
+
+
+.contenido-principal {
+    margin-left: 150px;
+    padding: 40px;
+}
+
+.intro {
+    max-width: 600px;
+}
+
+h1 {
+    font-size: var(--tamaño-titulo);
+    margin-bottom: 20px;
+}
+
+.resaltar {
+    color: var(--color-resaltar);
+}
+
+.formulario {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.formulario input {
+    padding: 10px;
+    font-size: var(--tamaño-texto);
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    flex: 1;
+}
+
+.btn-empezar {
+    background-color: var(--color-boton);
+    color: var(--color-boton-texto);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: var(--tamaño-boton);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-empezar:hover {
+    background-color: #e0a528;
+}
+
+.registro {
+    color: var(--color-resaltar);
+    font-size: var(--tamaño-texto);
+}
+
+@media only screen and (max-width: 1024px) {
+   
+    .botones-superiores {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .navegacion-movil {
+        width: 100%;
+    }
+
+}
+@media only screen and (max-width: 1024px) {
+    .iconos-redes-sociales {
+        display: none;
+    }
+}

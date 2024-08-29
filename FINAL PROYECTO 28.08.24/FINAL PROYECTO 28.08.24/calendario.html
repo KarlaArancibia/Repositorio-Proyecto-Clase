@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario Personalizado</title>
+    <style>
+ .calendar-container {
+    width: 100%;
+    max-width: auto;
+    margin: 0 auto;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.calendar-controls {
+    margin-bottom: 10px;
+}
+
+#daysOfWeek {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background-color: #f4f4f4;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#daysContainer {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    background-color: #ffffff8f;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#daysContainer div {
+    background-color: #cfcece;
+    padding: 10px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s;
+    font-size: 14px;
+}
+
+#daysContainer div.active {
+    background-color: #fbff00;
+}
+
+#daysContainer div:hover {
+    background-color: #a7a7a7;
+}
+
+#activitiesContainer {
+    background-color: #fafafa6c;
+    padding: 15px;
+    border: 1px solid #ffffff;
+    min-height: 200px;
+    font-size: 14px;
+}
+
+#confirmationBox {
+    display: none;
+    padding: 10px;
+    background-color: #11ff00;
+    border: 1px solid #000000;
+    color: #000000;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+#viewActivitiesContainer {
+    display: none;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.activity-item {
+    background-color: #51ff36;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.activity-item:hover {
+    background-color: #d0d0d0;
+}
+
+textarea {
+    width: calc(100% - 20px);
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #d9ff00;
+    box-sizing: border-box;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+button {
+    flex: 1;
+    margin: 0 5px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: #f4f4f4;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #ddd;
+}
+
+@media (max-width: 480px) {
+    #daysContainer div {
+        padding: 7px;
+        font-size: 12px;
+    }
+
+    #daysOfWeek {
+        font-size: 12px;
+        padding: 5px;
+    }
+
+    #activitiesContainer, #confirmationBox, #viewActivitiesContainer, .activity-item {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    textarea {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .buttons-container {
+        flex-direction: column;
+    }
+
+    button {
+        margin: 5px 0;
+        padding: 10px;
+    }
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.calendar-container {
+    width: 300px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-controls {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#daysOfWeek {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+#daysOfWeek span {
+    font-weight: bold;
+    color: #555;
+}
+
+#daysContainer {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.day {
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.day:hover {
+    background-color: #d0d0d0;
+}
+
+.day.active {
+    background-color: #6fa8dc;
+    color: white;
+}
+
+#activitiesContainer {
+    margin-top: 10px;
+}
+
+.activity {
+    margin-bottom: 10px;
+}
+
+input[type="datetime-local"], input[type="text"], textarea {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 10px;
+    background-color: #6fa8dc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    display: block;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #5c94d6;
+}
+
+@media (max-width: 320px) {
+    .calendar-container {
+        width: 100%;
+    }
+}
+
+}
+
+    </style>
+</head>
+<body>
+
+<div class="calendar-container">
+    <div class="calendar-controls">
+        <select id="monthSelector">
+            <option value="0">Enero</option>
+            <option value="1">Febrero</option>
+            <option value="2">Marzo</option>
+            <option value="3">Abril</option>
+            <option value="4">Mayo</option>
+            <option value="5">Junio</option>
+            <option value="6">Julio</option>
+            <option value="7">Agosto</option>
+            <option value="8">Septiembre</option>
+            <option value="9">Octubre</option>
+            <option value="10">Noviembre</option>
+            <option value="11">Diciembre</option>
+        </select>
+    </div>
+    
+    <div id="daysOfWeek">
+        <div>Lun</div>
+        <div>Mar</div>
+        <div>Mie</div>
+        <div>Jue</div>
+        <div>Vie</div>
+        <div>Sab</div>
+        <div>Dom</div>
+    </div>
+    
+    <div id="daysContainer"></div>
+    
+    <div id="activitiesContainer">
+        <p>Seleccione un día para agregar o ver actividades</p>
+        
+    </div>
+    <iframe src="Recordatorio.html" style="width: 100%; height: 360px; "></iframe>
+</div>
+
+<script>
+  const daysContainer = document.getElementById('daysContainer');
+const monthSelector = document.getElementById('monthSelector');
+
+let currentYear = 2024;
+let currentMonth = 7; // Establecer el mes de inicio en agosto (0-indexado, agosto es 7)
+
+function generateDays(year, month) {
+    daysContainer.innerHTML = '';
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const firstDay = new Date(year, month, 1).getDay();
+
+    for (let i = 0; i < firstDay; i++) {
+        const emptyElement = document.createElement('div');
+        daysContainer.appendChild(emptyElement);
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dayElement = document.createElement('div');
+        dayElement.textContent = day;
+        dayElement.classList.toggle('active', hasActivities(day, month + 1, year));
+        dayElement.addEventListener('click', () => {
+            showActivity(day, month + 1, year);
+        });
+        daysContainer.appendChild(dayElement);
+    }
+}
+
+// Al cargar la página, inicializar el calendario en agosto
+generateDays(currentYear, currentMonth);
+
+// Actualizar el mes seleccionado en el selector (si tienes uno)
+monthSelector.selectedIndex = currentMonth;
+
+
+function showActivity(day, month, year) {
+    const activitiesContainer = document.getElementById('activitiesContainer');
+    activitiesContainer.innerHTML = `
+        <h3>Activities for ${day}/${month}/${year}</h3>
+        <textarea id="activityText" placeholder="Escribe aqui..."></textarea>
+        <button onclick="saveActivity(${day}, ${month}, ${year})">Save</button>
+        <button onclick="viewActivities(${day}, ${month}, ${year})">Ver Actividades</button>
+        <div id="confirmationBox" style="display:none;">Activity saved successfully!</div>
+        <div id="viewActivitiesContainer"></div>
+    `;
+}
+
+function saveActivity(day, month, year) {
+    const activityText = document.getElementById('activityText').value;
+    if (activityText.trim() !== '') {
+        const activities = JSON.parse(localStorage.getItem('activities')) || [];
+        activities.push({ day, month, year, text: activityText });
+        localStorage.setItem('activities', JSON.stringify(activities));
+
+        document.getElementById('confirmationBox').style.display = 'block';
+        setTimeout(() => {
+            document.getElementById('confirmationBox').style.display = 'none';
+        }, 2000);
+
+        // Marcar el día en amarillo
+        const dayElement = [...daysContainer.children].find(
+            el => el.textContent == day && el.className.includes('active')
+        );
+        if (dayElement) {
+            dayElement.classList.add('active');
+        }
+    }
+}
+
+
+function viewActivities(day, month, year) {
+    const activitiesContainer = document.getElementById('viewActivitiesContainer');
+    const activities = JSON.parse(localStorage.getItem('activities')) || [];
+    const filteredActivities = activities.filter(activity => 
+        activity.day === day && activity.month === month && activity.year === year
+    );
+
+    if (filteredActivities.length > 0) {
+        activitiesContainer.innerHTML = filteredActivities.map((activity, index) => 
+            `<div class="activity-item">
+                <span id="activityText-${index}">${activity.text}</span>
+                <button onclick="editActivity(${day}, ${month}, ${year}, ${index})">Editar</button>
+                <button onclick="deleteActivity(${day}, ${month}, ${year}, ${index})">Eliminar</button>
+            </div>`
+        ).join('');
+    } else {
+        activitiesContainer.innerHTML = '<p>No hay actividades guardadas para este día.</p>';
+        // Desmarcar el día si no hay actividades
+        const dayElement = [...daysContainer.children].find(
+            el => el.textContent == day && el.className.includes('active')
+        );
+        if (dayElement) {
+            dayElement.classList.remove('active');
+        }
+        
+    }
+
+    activitiesContainer.style.display = 'block';
+}
+function editActivity(day, month, year, index) {
+    const activityTextElement = document.getElementById(`activityText-${index}`);
+    const currentText = activityTextElement.textContent;
+    
+    activityTextElement.innerHTML = `
+        <input type="text" id="editText-${index}" value="${currentText}">
+        <button onclick="saveEditedActivity(${day}, ${month}, ${year}, ${index})">Guardar</button>
+        <button onclick="cancelEdit(${index}, '${currentText}')">Cancelar</button>
+    `;
+}
+function saveEditedActivity(day, month, year, index) {
+    const editedText = document.getElementById(`editText-${index}`).value;
+
+    if (editedText.trim() !== '') {
+        let activities = JSON.parse(localStorage.getItem('activities')) || [];
+        const activityIndex = activities.findIndex(activity => 
+            activity.day === day && activity.month === month && activity.year === year
+        );
+        activities[activityIndex + index].text = editedText;
+        localStorage.setItem('activities', JSON.stringify(activities));
+        viewActivities(day, month, year);
+    }
+}
+function cancelEdit(index, originalText) {
+    const activityTextElement = document.getElementById(`activityText-${index}`);
+    activityTextElement.innerHTML = originalText;
+}
+
+
+function hasActivities(day, month, year) {
+    const activities = JSON.parse(localStorage.getItem('activities')) || [];
+    return activities.some(activity => 
+        activity.day === day && activity.month === month && activity.year === year
+    );
+}
+
+monthSelector.addEventListener('change', () => {
+    generateDays(currentYear, parseInt(monthSelector.value));
+});
+
+generateDays(currentYear, new Date().getMonth());
+function deleteActivity(day, month, year, index) {
+    let activities = JSON.parse(localStorage.getItem('activities')) || [];
+    const dayActivities = activities.filter(activity => 
+        activity.day === day && activity.month === month && activity.year === year
+    );
+
+    // Elimina la actividad específica
+    dayActivities.splice(index, 1);
+
+    // Actualiza la lista completa de actividades
+    activities = activities.filter(activity => 
+        !(activity.day === day && activity.month === month && activity.year === year)
+    ).concat(dayActivities);
+
+    localStorage.setItem('activities', JSON.stringify(activities));
+    
+    // Verifica si quedan actividades en el día
+    if (dayActivities.length === 0) {
+        const dayElement = [...daysContainer.children].find(
+            el => el.textContent == day
+        );
+        if (dayElement) {
+            dayElement.classList.remove('active');
+        }
+    }
+    
+    viewActivities(day, month, year);
+}
+
+
+</script>
+
+</body>
+</html>
+    
